@@ -1,8 +1,8 @@
 const User = require('../models/user');
 
 module.exports.profile = function (req, res) {
-  return res.render("users", {
-    title: "Users",
+  return res.render("users_profile", {
+    title: "Users Profile",
   });
 };
 
@@ -14,14 +14,14 @@ module.exports.signUp = function (req, res) {
 };
 
 // render signin page
-module.exports.signIn = function (req, res) {
+module.exports.signIn = function(req, res) {
   return res.render("user_signin", {
     title: "Codeial | Sign In",
   });
 };
 
 // get the sign in data
-module.exports.create = function (req, res) {
+module.exports.create = function(req, res) {
   if(req.body.password!== req.body.confirm_password){
     return res.redirect('back');
   }
@@ -44,11 +44,10 @@ module.exports.create = function (req, res) {
     else{
       return res.redirect('back');
     }
-  })
-};
+  });
+}
 
 // sign in and create session for user
 module.exports.createSession = function (req, res) {
-  // ToDo later
-  
+ return res.redirect('/');
 };
