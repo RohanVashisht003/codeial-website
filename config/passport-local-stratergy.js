@@ -1,11 +1,11 @@
 const passport = require("passport");
 
-const passportLocal = require("passport-local").Strategy;
+const LocalStratergy = require("passport-local").Strategy;
 
 const User = require("../models/user");
 // authentication using passport
 passport.use(
-  new passportLocal({ usernameField: "email" }, function (
+  new LocalStratergy({ usernameField: "email" }, function (
     email,
     password,
     done
@@ -41,4 +41,27 @@ passport.deserializeUser(function (id, done) {
   });
 });
 
+
+// check if user is authenticated
+passport.checkAuthentication = function(req, res, next){
+
+  // if user is signed in then pass on the request to next function
+  if(req.isAuthenticated()){
+    return next();
+  }
+
+
+  // if the user is not signed in 
+  return res.redirect('/users/sign-in');
+}
+
+passport.setAuthenticatedUser = function(req, res, next){
+  if(req.isAuthenticated()){
+
+    // req.user contains the current sign-in user from session cookie and we are storing it into locals for views
+    res.locals.user = req.user;
+    // console.log(req.user);
+  }
+  next();
+}
 module.exports = passport;
