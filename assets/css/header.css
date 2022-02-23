@@ -1,0 +1,24 @@
+header {
+  background-color: #477cf0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 8%;
+  color: white; }
+
+header ul {
+  list-style: none; }
+
+header li {
+  display: inline;
+  margin: 5px; }
+
+header a {
+  color: white;
+  text-decoration: none;
+  font-size: large; }
+
+header a:hover {
+  color: black;
+  cursor: pointer; }
