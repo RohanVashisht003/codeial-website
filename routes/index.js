@@ -6,6 +6,6 @@ console.log("router loaded");
 
 
 router.get('/',homeController.home);
-router.use('/users',require('./users_route'));
-router.use('/posts',require('./posts_route'));
+router.use('/users',require('./users'));
+router.use('/posts',require('./posts'));
 module.exports = router;
