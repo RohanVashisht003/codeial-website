@@ -1,4 +1,3 @@
-const { redirect } = require("express/lib/response");
 const Comment = require("../models/comment");
 const Post = require("../models/post");
 
