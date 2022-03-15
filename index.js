@@ -37,8 +37,7 @@ app.set("layout extractScripts", true);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-app.use(
-  session({
+app.use(session({
     name: "codeial",
     // TODO change the secret before deployement in production mode
     secret: "blabla",
