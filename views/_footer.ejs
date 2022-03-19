@@ -2,7 +2,9 @@
     <p id="right">Coding Ninjas. All rights reserved</p>
 
     <div id="nav-links">
-        <!-- <a href="/users/profile">Profile</a> -->
         <a href="/">Home</a>
+        <% if(locals.user){%>
+        <a href ="/users/profile/<%= user.id%>">My Profile</a>
+        <%}%>
     </div>
 </footer>

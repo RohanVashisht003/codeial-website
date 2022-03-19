@@ -28,7 +28,10 @@ app.use(express.urlencoded());
 
 app.use(cookieParser());
 
+// accessing static files
 app.use(express.static("./assets"));
+
+// using ejs layouts
 app.use(expressLayouts);
 
 // extract style and script from subpages into layout

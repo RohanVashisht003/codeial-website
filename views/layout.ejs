@@ -14,17 +14,23 @@
     <link rel="stylesheet" href="/css/footer.css" />
     <%- style %>
   </head>
+
+
   <body>
     <%- include('_header.ejs'); %> 
+
     <!-- main -->
-    <main id="layout-main"><%- body %></main>
+    <main id="layout-main">
+      <%- body %>
+    </main>
 
     <%- include('_footer.ejs'); %> 
+    
     <%- script %>
 
-
     <script>
-       <% if(flash.success && flash.success.length>0) {%>
+      // for success
+       <% if(flash.success && flash.success.length>0) { %>
           new Noty({
           theme:'relax',
           text: '<%= flash.success %>',
@@ -45,6 +51,7 @@
           timeout:1500
       }).show();
       <% } %>
+
     </script>
   </body>
 </html>
