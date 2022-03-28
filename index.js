@@ -5,11 +5,12 @@ const path = require("path");
 const port = 8000;
 const expressLayouts = require("express-ejs-layouts");
 const db = require("./config/mongoose");
-
 // used for session cookies
 const session = require("express-session");
 const passport = require("passport");
 const passportLocal = require("./config/passport-local-stratergy");
+const passportJWT = require('./config/passport-jwt-strategy');
+const passportGoogle = require('./config/passport-google-oauth2-stratergy')
 const MongoStore = require("connect-mongo");
 const sassMiddleWare = require("node-sass-middleware");
 const flash = require('connect-flash');
@@ -21,7 +22,7 @@ app.use(sassMiddleWare({
   debug: true,
   outputStyle: 'extended',
   prefix: '/css'
-}))
+}));
 
 
 app.use(express.urlencoded());
@@ -30,6 +31,7 @@ app.use(cookieParser());
 
 // accessing static files
 app.use(express.static("./assets"));
+app.use('/uploads',express.static(__dirname + '/uploads'));
 
 // using ejs layouts
 app.use(expressLayouts);

@@ -2,8 +2,16 @@
 
 <form action="/users/create" method="POST">
     <input type="text" name="name" placeholder="Enter Name" required>
+
     <input type="email" name="email" placeholder="Email" required>
+
     <input type="password" name="password" placeholder="Password" required>
+
     <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+    
     <input type="submit" value="Sign Up">
 </form>
+
+<p>
+    <a href="/users/auth/google">Google SignIn/SignUp</a>
+</p>
