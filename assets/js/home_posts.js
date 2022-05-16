@@ -1,33 +1,36 @@
 
 {
             // method to submit the form data form new post using AJAX
-            let createPost = function () {
-                let newPostForm = $('#new-post-form');
-                newPostForm.submit(function (e) {
-                    e.preventDefault();
+        let createPost = function(){
+            let newPostForm = $('#new-post-form');
 
-                    $.ajax({
-                        type: 'post',
-                        url: '/posts/create',
-                        data: newPostForm.serialize(),
-                        success: function (data) {
-                           let newPost = newPostDom(data.data.post);
-                           $('#posts-list-container > ul').prepend(newPost);
-                           deletePost($('.delete-post-button',newPost));
+            newPostForm.submit(function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    type: 'post',
+                    url: '/posts/create',
+                    data: newPostForm.serialize(),                        
+                    success: function (data) {
+                      let newPost = newPostDom(data.data.post);
+                      $('#posts-list-container > ul').prepend(newPost);
+                       deletePost($('.delete-post-button',newPost));
+                    console.log(data);
                         },
-                        error: function (error) {
-                            console.log(error.responseText);
+                    error: function (error) {
+                        console.log(error.responseText);
                         }
                     });
                 });
-            }
+                  }
 
 let newPostDom = function (post) {
     return $(`<li id="post-<%= ${post._id}%>">
             <p>
                 <small>
-                    <a class="delete-post-button" href="/posts/destroy/${post._id}">X</a>
+                    <a class="delete-post-button" href="/posts/destroy/${post.id}">X</a>
                 </small>
+
                     ${post.content}
                 <br>
                 <small>
@@ -53,6 +56,7 @@ let newPostDom = function (post) {
             }
 
 
+
         let deletePost = function(deleteLink){
             $(deleteLink).click(function(){
                 e.preventDefault();
@@ -73,3 +77,5 @@ let newPostDom = function (post) {
 
             createPost();
         }
+
+

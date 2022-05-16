@@ -4,11 +4,13 @@ const LocalStratergy = require("passport-local").Strategy;
 
 
 const User = require("../models/user");
+
 // authentication using passport
 passport.use(new LocalStratergy({
   usernameField: "email",
   passReqToCallback: true,
-}, function (req, email, password, done) {
+}, 
+function (req, email, password, done) {
   // find a user and establish identity
   User.findOne({
     email: email

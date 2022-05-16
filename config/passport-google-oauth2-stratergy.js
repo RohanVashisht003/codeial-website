@@ -9,6 +9,7 @@ passport.use(new googleStratergy({
         clientSecret: "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",
         callbackURL: "http://localhost:8000/users/auth/google/callback"
     },
+    
     function (accessToken, refreshToken, profile, done) {
         User.findOne({
             email: profile.emails[0].value
@@ -26,7 +27,7 @@ passport.use(new googleStratergy({
                 // if not found, create user and set it req.user;
                 User.create({
                     name: profile.displayName,
-                    emil: profile.emails[0].value,
+                    email: profile.emails[0].value,
                     password: crypto.randomBytes(20).toString('hex')
                 }, function (err, user) {
                     if (err) {
