@@ -1,31 +1,50 @@
-<li>
-    <p>
-      <% if(locals.user && locals.user.id == post.user.id) { %>
-      <small>
-        <a href="/posts/destroy/<%= post.id %>">X</a>
-      </small>
-      <% } %>
+<li id="post-<%= post._id %>">
+  <div id="post">
+    <% if((locals.user) && locals.user.id == post.user.id) { %>
+    <small id="delete">
+      <a class="delete-post-button" href="/posts/destroy/<%= post.id %>">x</a>
+    </small>
+    <% } %>
+    <span id="content">
       <%= post.content %>
-      <br>
-      <small>
-        <%= post.user.name%>
-      </small>
-    </p>
-    <div class="post-comments">
-      <% if(locals.user) {%>
-      <form action="/comments/create" method="POST">
-        <input type="text" name="content" placeholder="add comments here.." required>
-        <input type="hidden" name="post" value="<%= post._id%>">
-        <input type="submit" value="Add Comment">
-      </form>
-      <%  } %>
+    </span>
+    <br>
+    <small id="name">
+      <%= post.user.name %>
+    </small>
 
-      <div class="post-comments-list">
-        <ul id="post-comments-<%= post._id%>">
-          <% for(comment of post.comments){%>
-            <%- include('_comment.ejs')-%>
-         
+    <!-- display the likes of the post -->
+    <br>
+    <small>
+      <% if(locals.user){ %>
+        <a class="toggle-like-button" data-likes="<%= post.likes.length %>" href="/likes/toggle/?id=<%= post._id %>&type=Post">
+
+          <%= post.likes.length %>Likes
+        </a>
+      <% }else {%>
+        <p class="toggle-like-button-offline">
+          <%= post.likes.length %> Likes 
+      </p>
+      <% } %>
+    </small>
+  </div>
+  <div class="post-comments">
+    <h4>Comments</h4>
+    <% if(locals.user) {%>
+    <form action="/comments/create" method="POST" id="post-<%= post._id %>-comments-form" class="new-comment-form">
+      <input id="comment" type="text" name="content" placeholder="add comments here.." required>
+      <input type="hidden" name="post" value="<%= post._id%>">
+      <input id="comment-btn"type="submit" value="Add Comment">
+    </form>
+    <%  } %>
+
+    <div class="post-comments-list">
+      <ul id="post-comments-<%= post._id%>">
+        <% for(comment of post.comments){%>
+          <%- include('_comment.ejs')-%>
           <%}%>
-                            </div>
-                    </div>
-                </li>
+      </ul>
+        
+     </div>
+  </div>
+</li>
