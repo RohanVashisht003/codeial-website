@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prod_start": "SET NODE_ENV=production && nodemon index.js"
   },
@@ -20,6 +20,7 @@
     "express": "^4.17.2",
     "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.17.2",
+    "gh-pages": "^4.0.0",
     "gulp-cssnano": "^2.1.3",
     "gulp-rev": "^9.0.0",
     "gulp-sass": "^5.1.0",
