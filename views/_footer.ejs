@@ -1,10 +1,22 @@
-<footer>
-    <p id="right">Coding Ninjas. All rights reserved</p>
+<footer id="footerr">
+    <div>
+        <p id="right">Rohan Inc. All rights reserved</p>
+    </div>
+   
 
     <div id="nav-links">
-        <a href="/">Home</a>
-        <% if(locals.user){%>
-        <a href ="/users/profile/<%= user.id%>">My Profile</a>
-        <%}%>
+        <nav class="footer-nav">
+            <ul>
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                <li>
+                   
+                    <% if(locals.user) {%>
+                        <a href="/users/profile/<%= user.id %>">Profile</a>
+                        <%}%>
+                </li>
+            </ul>
+        </nav>
     </div>
 </footer>

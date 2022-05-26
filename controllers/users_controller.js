@@ -1,6 +1,10 @@
 const User = require("../models/user");
 const fs = require('fs');
 const path = require('path');
+// const Post = require('../models/post');
+// const Like = require('../models/likes');
+// const Comment = require('../models/comment');
+
 
 module.exports.profile = function (req, res) {
   User.findById(req.params.id, function(err, user){

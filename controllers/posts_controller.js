@@ -1,5 +1,10 @@
 const Post = require('../models/post');
 const Comment = require('../models/comment');
+const Like = require('../models/likes');
+const postsMailer = require('../mailers/posts_mailer');
+const postEmailWorker = require('../workers/post_email_worker');
+const queue = require('../config/kue');
+
 
 module.exports.create = async function (req, res) {
     try {
@@ -7,37 +12,47 @@ module.exports.create = async function (req, res) {
             content: req.body.content,
             user: req.user._id
         });
-        if (req.xhr) {
-
-            // post = await post.populate('user','name').execPopulate();
-
-            return res.json({
-                data: {
-                    post: post
-                },
-                message: "Post created"
-            })
+        post = await post.populate('user','name _id email avatar');
+        try{
+            if (req.xhr) {
+    
+                return res.status(200).json({
+                    data: {
+                        post: post
+                    },
+                    message: "Post created"
+                });
+            }
         }
-        req.flash('success', "Post Created");
-        return res.redirect('back');
-    } catch (err) {
-        req.flash('error', err);
-        console.log(err);
-        return res.redirect('back');
-    }
+        catch (err) {
+            req.flash('error', err);
+            console.log(err);
+            return res.redirect('back');
+        }
+        
+} catch(err){
+    req.flash('error', err);
+    console.log(err);
+    return res.redirect('back');
+}
 }
 
 module.exports.destroy = async function (req, res) {
-    try {
-        let post = await Post.findById(req.params.id)
-        
-        if (post.user == req.user.id) {
-            post.remove();
 
+    try {
+        let post = await Post.findById(req.params.id);
+             console.log("user",post.user);
+             
+        if (post.user == req.user.id) {
+            
+            // delete all associated likes and comment for the post
+
+            await Like.deleteMany({likeable: post, onModel: 'Post'});
+            await Like.deleteMany({_id: {$in: post.comments}});
             await Comment.deleteMany({
                 post: req.params.id
             });
-
+            post.remove();
             if(req.xhr){
                 return res.status(200).json({
                     data:{
@@ -48,8 +63,9 @@ module.exports.destroy = async function (req, res) {
             }
             req.flash('success', "Post and comments deleted");
             return res.redirect('back');
+
         } else {
-            req.flash('success', "You cannot delete this post");
+            req.flash('error', "You are not authorized ,cannot delete this post");
             return res.redirect('back');
         }
     } catch (err) {
