@@ -3,7 +3,7 @@
   position: fixed;
   bottom: 10px;
   right: 10px;
-  border: 1px dashed grey;
+  border: none;
   height: 450px;
   width: 300px;
   background: white;
@@ -28,7 +28,8 @@
     overflow: auto; }
     #user-chat-box #chat-messages-list .other-message {
       text-align: left;
-      padding: 5px; }
+      padding: 5px; 
+    }
       #user-chat-box #chat-messages-list .other-message span {
         display: inline-block;
         padding: 15px;
