@@ -10,7 +10,7 @@ const firebaseConfig = {
   projectId: "codeial-003",
   storageBucket: "codeial-003.appspot.com",
   messagingSenderId: "380898498425",
-  appId: "1:380898498425:web:f1d321ede1e8aae15101a8"
+  appId: "1:380898498425:web:15230177c837bf4d5101a8"
 };
 
 // Initialize Firebase
