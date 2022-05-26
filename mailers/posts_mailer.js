@@ -1,10 +1,10 @@
 const nodeMailer = require('../config/nodemailer');
 
 
-exports.newPost = (post, comment) =>{
+exports.newPost = (post) =>{
     console.log('inside new post mailer', post);
 
-    let htmlString = nodeMailer.renderTemplate({post:post, comment:comment}, '/post/new_post.js');
+    let htmlString = nodeMailer.renderTemplate({post:post}, '/posts/new_post.ejs');
 
     nodeMailer.transporter.sendMail({
         from:'sharmashubham2961@gmail.com',

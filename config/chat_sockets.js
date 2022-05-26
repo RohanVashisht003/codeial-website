@@ -13,7 +13,7 @@ module.exports.chatSockets = function (socketServer) {
         });
 
         socket.on('join_room', function (data) {
-            console.log('joining request received', data);
+            // console.log('joining request received', data);
 
             socket.join(data.chatroom); 
             

@@ -13,9 +13,18 @@ module.exports.create = async function (req, res) {
             user: req.user._id
         });
         post = await post.populate('user','name _id email avatar');
-        try{
+
+        let job = queue.create('post_email',{
+            post:post,
+        }).save(function(err){
+            if(err){
+                console.log(err, 'error in creating queue');
+                return;
+            }
+            console.log('job enqueued',job.id);
+        })
+
             if (req.xhr) {
-    
                 return res.status(200).json({
                     data: {
                         post: post
@@ -23,12 +32,6 @@ module.exports.create = async function (req, res) {
                     message: "Post created"
                 });
             }
-        }
-        catch (err) {
-            req.flash('error', err);
-            console.log(err);
-            return res.redirect('back');
-        }
         
 } catch(err){
     req.flash('error', err);
