@@ -25,14 +25,15 @@ const development = {
         host: 'smtp.gmail.com',
         port: 587,
         secure: false,
+// ----------------------use your credentials
         auth: {
-            user: 'sharmashubham2961@gmail.com',
-            pass: 'uoamfdtnjxtkxyrx'
+            user: '####',
+            pass: '####'
         }
     },
-    google_client_id:"550300148344-d83qjf3crf214nkn8omdo53mtcgqvs9h.apps.googleusercontent.com",
-    google_client_secret: "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",
-    google_callback_url: "http://localhost:8000/users/auth/google/callback",
+    google_client_id: '####',
+    google_client_secret: '####',
+    google_callback_url:  '####',
     jwt_key: 'codeial',
     morgan: {
         mode: 'dev',
